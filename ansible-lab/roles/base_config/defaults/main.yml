@@ -1,0 +1,4 @@
+# Default values for the base_config role
+snmp_enabled: true
+snmp_community: LabReadOnly
+login_banner: "Authorized access only - Automation Lab"

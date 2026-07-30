@@ -1,0 +1,6 @@
+- name: COnfigure routers with the base_config role
+  hosts: routers
+  gather_facts: false
+
+  roles:
+    - base_config
