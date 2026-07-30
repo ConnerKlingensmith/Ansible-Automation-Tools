@@ -1,0 +1,44 @@
+- name: Configure base settings on routers
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Set hostname
+      cisco.ios.ios_config:
+        lines:
+          - hostname {{ inventory_hostname }}
+
+    - name: Configure loopback interface
+      cisco.ios.ios_config:
+        lines:
+          - ip address 172.16.1.{{ ansible_host.split('.')[-1] }} 255.255.255.255
+        parents:                # Parents keyword tells ios_config which configuration block to enter before applying the lines
+          - interface Loopback0
+
+    - name: Add interface description
+      cisco.ios.ios_config:
+        lines:
+          - description Managed by Ansible
+        parents: interface GigabitEthernet1
+
+    - name: Verify hostname is set
+      cisco.ios.ios_command:
+        commands:
+          - show running-config | include hostname
+      register: hostname_check
+
+    - name: Print hostname verification
+      ansible.builtin.debug:
+        var: hostname_check.stdout_lines
+
+########################
+# Ensure configuration change by SSH into routers
+########################
+# show running-config | section interface Loopback
+# show running-config | include hostname
+# show running-config | section GigabitEthernet1
+
+    - name: Save running config to startup
+      cisco.ios.ios_config:
+        save_when: modified
+

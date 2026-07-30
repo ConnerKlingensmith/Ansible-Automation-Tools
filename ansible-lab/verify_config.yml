@@ -1,0 +1,30 @@
+- name: Verify router configuration
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Check hostname
+      cisco.ios.ios_command:
+        commands:
+          - show running-config | include hostname
+      register: hostname_result
+
+    - name: Check Loopback0 exists and is up
+      cisco.ios.ios_command:
+        commands:
+          - show running-config | section Loopback0
+      register: loopback_result
+
+    - name: Check interface description
+      cisco.ios.ios_command:
+        commands:
+          - show running-config | section GigabitEthernet1
+      register: description_result
+
+    - name: Print all verification results
+      ansible.builtin.debug:
+        msg:
+          - "=== {{ inventory_hostname }} ==="
+          - "Hostname: {{ hostname_result.stdout[0] }}"
+          - "Loopback: {{ loopback_result.stdout_lines[0][0] }}"
+          - "Description: {{ description_result.stdout[0] }}"
