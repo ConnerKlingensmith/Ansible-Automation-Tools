@@ -1,0 +1,14 @@
+hostname {{ inventory_hostname }}
+!
+{% for lo in loopbacks %}
+interface Loopback{{ lo.id }}
+ description {{ lo.description }}
+ ip address {{ lo.ip }} {{ lo.mask }}
+!
+{% endfor %}
+{% if snmp_enabled %}
+snmp-server community {{ snmp_community }} RO
+{% endif %}
+banner login ^C
+{{ login_banner }}
+^C

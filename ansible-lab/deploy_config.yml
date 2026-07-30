@@ -1,0 +1,22 @@
+- name: Render and deploy per-router configuration
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Render base config from template
+      ansible.builtin.template:
+        src: templates/base_config.j2
+        dest: "/tmp/{{ inventory_hostname }}.cfg"
+      delegate_to: localhost
+
+    - name: Push rendered config to the device
+      cisco.ios.ios_config:
+        src: "/tmp/{{ inventory_hostname }}.cfg"
+
+############################
+# Test deploy on routers
+############################
+#
+# ssh -i ~/.ssh/AutomationLab-Key.pem ec2-user@<c8kv-1-private-ip>
+# show ip interface brief | include Loopback
+# show running-config | include snmp-server community
