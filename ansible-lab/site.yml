@@ -4,3 +4,14 @@
 
   roles:
     - base_config
+
+#########################
+# Run Playbook
+  # ansible-playbook site.yml --vault-password-file ~/.vault_pass
+  # ansible-playbook site.yml --ask-vault-pass
+#########################
+
+#########################
+# View the encrypted passwords
+  # ansible-vault view group_vars/routers/vault.yml --vault-password-file ~/.vault_pass
+#########################

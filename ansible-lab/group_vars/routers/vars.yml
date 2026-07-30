@@ -1,0 +1,6 @@
+# Applies to every device in the routers group
+snmp_enabled: true
+login_banner: "Authorized access only - Automation Lab"
+# Reference the encrypted values from vault.yml
+snmp_community: "{{ vault_snmp_community }}"
+ansible_become_password: "{{ vault_become_password }}"
