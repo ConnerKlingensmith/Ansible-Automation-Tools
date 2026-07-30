@@ -1,0 +1,70 @@
+- name: Gather IOS Info from routers
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Get show version
+      cisco.ios.ios_command:
+        commands:
+          - show version
+      register: version_output
+
+    - name: Print show version output
+      ansible.builtin.debug:
+        var: version_output.stdout_lines
+
+    - name: Get show ip interface brief
+      cisco.ios.ios_command:
+        commands:
+          - show ip interface brief
+      register: interface_output
+
+    - name: Print interface output
+      ansible.builtin.debug:
+        var: interface_output.stdout_lines
+
+- name: Collect structured facts
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Gather IOS facts
+      cisco.ios.ios_facts:
+        gather_subset:
+          - all
+
+    - name: Print hostname
+      ansible.builtin.debug:
+        msg: "Device hostname is {{ ansible_net_hostname }}"
+
+    - name: Print IOS version
+      ansible.builtin.debug:
+        msg: "IOS-XE version is {{ ansible_net_version }}"
+
+    - name: Print Interface List
+      ansible.builtin.debug:
+        msg: "Interfaces: {{ ansible_net_interfaces.keys() | list }}"
+
+    - name: Print all facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
+ ###################
+ # Commands
+ ###################
+ 
+"""
+ansible-playbook gather_info.yml -v
+  This shows the full taask output including return values
+
+ansible-playbook gather_info.yml -vv
+  This shows connection details -- which host Ansible is connecting to and how
+
+ansible-playbook gather_info.yml -vvv
+  This shows the full debug output including the SSH connectioin being established, commands being sent, 
+  and raw responses being resolved
+
+
+
+
+

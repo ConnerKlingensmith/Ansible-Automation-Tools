@@ -1,0 +1,18 @@
+all:
+  children:
+    routers:
+      hosts:
+        c8kv-1:
+          ansible_host: 10.0.1.29
+        c8kv-2:
+          ansible_host: 10.0.1.19
+      vars:
+        ansible_network_os: ios
+        ansible_connection: network_cli
+        ansible_network_cli_ssh_type: libssh
+        ansible_user: ansible
+        ansible_password: Cisco123!
+        ansible_libssh_hostkeys: ssh-rsa
+        ansible_become: yes
+        ansible_become_method: enable
+        ansible_become_password: Cisco123!

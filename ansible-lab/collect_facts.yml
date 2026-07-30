@@ -1,0 +1,36 @@
+- name: Collect and save device facts
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+
+    - name: Gather IOS facts
+      cisco.ios.ios_facts:
+        gather_subset:
+          - all
+
+    - name: Display device summary
+      ansible.builtin.debug:
+        msg:
+          - "Hostname:    {{ ansible_net_hostname }}"
+          - "Model:       {{ ansible_net_model }}"
+          - "IOS Version: {{ ansible_net_version }}"
+          - "Serial:      {{ ansible_net_serialnum }}"
+
+    - name: Save facts to file
+      ansible.builtin.copy:
+        content: "{{ ansible_facts | to_nice_json }}"
+        dest: "/tmp/{{ inventory_hostname }}_facts.json"
+      delegate_to: localhost
+
+####################
+# Commands
+####################
+
+"""
+check the output lines:
+  cat /tmp/c8kv-1_facts.json | head -50
+  cat /tmp/c8kv-2_facts.json | head -50
+
+This outputs JSON snapshots of both routers that you could diff against a future run to detect configuration drift.
+"""
