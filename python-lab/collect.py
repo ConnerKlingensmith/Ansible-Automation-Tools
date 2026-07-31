@@ -11,7 +11,7 @@ devices = [
 commands = ["show ip interface brief", "show ip route"]
 
 for device in devices:
-    connection = ConnectHandler(**device)
+    connection = ConnectHandler(**device)        ### ConnectHandler(**device) --> Opens an SSH session using a device dictionary
     hostname = connection.find_prompt().strip("#>")
     print(f"\n===== {hostname} ({device['host']}) =====")
     for command in commands:
