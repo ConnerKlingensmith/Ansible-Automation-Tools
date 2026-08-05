@@ -1,0 +1,4 @@
+terraform-lab/.terraform/
+
+**/.terraform/
+**/.terraform.lock.hcl
