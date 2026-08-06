@@ -36,9 +36,9 @@ Verify Connectivity from ec2 host
 ping -c 2 leaf1
 ssh arista@leaf1
 
-################################
-Confirm eAPI ansers over HTTPS
-################################
+#########################################################
+Confirm eAPI ansers over HTTPS -- JSON-RPC POST request
+#########################################################
 
 curl -k -u arista:Arista123! https://leaf1/command-api \
   -H "Content-Type: application/json" \
