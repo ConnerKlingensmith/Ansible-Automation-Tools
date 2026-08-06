@@ -1,0 +1,14 @@
+all:
+  children:
+    arista:
+      hosts:
+        leaf1:
+      vars:
+        ansible_network_os: arista.eos.eos
+        ansible_connection: ansible.netcommon.httpapi
+        ansible_httpapi_use_ssl: true
+        ansible_httpapi_validate_certs: false
+        ansible_user: arista
+        ansible_password: Arista123!
+        ansible_become: true
+        ansible_become_method: enable

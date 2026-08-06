@@ -1,0 +1,13 @@
+---
+- name: Gather EOS facts
+  hosts: arista
+  gather_facts: false
+
+  tasks:
+
+    - name: Collect device facts
+      arista.eos.eos_facts:
+
+    - name: Show model and version
+      ansible.builtin.debug:
+        msg: "{{ ansible_net_hostname }} is a {{ ansible_net_model }} running {{ ansible_net_version }}"

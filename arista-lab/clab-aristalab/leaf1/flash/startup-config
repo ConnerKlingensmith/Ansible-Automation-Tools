@@ -1,4 +1,4 @@
-! Startup-config last modified at Thu Aug  6 15:50:52 2026 by root
+! Startup-config last modified at Thu Aug  6 18:09:25 2026 by arista
 ! device: leaf1 (cEOSLab, EOS-4.36.1F-48405728.4361F (engineering build))
 !
 no aaa root
@@ -26,6 +26,10 @@ management api gnmi
 !
 management api netconf
    transport ssh default
+!
+interface Loopback14
+   description Configured via pyeapi
+   ip address 10.14.14.14/32
 !
 interface Management0
    ip address 172.20.20.11/24

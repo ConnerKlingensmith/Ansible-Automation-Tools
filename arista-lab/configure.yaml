@@ -1,0 +1,12 @@
+- name: Configure a loopback on each switch
+  hosts: arista
+  gather_facts: false
+
+  tasks:
+
+    - name: Ensure Loopback15 is configured
+      arista.eos.eos_config:
+        parents: interface Loopback15
+        lines:
+          - description Configured via Ansible
+          - ip address 10.15.15.15/32
