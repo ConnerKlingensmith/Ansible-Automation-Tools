@@ -1,0 +1,10 @@
+name: aristalab
+mgmt:
+  network: clab-mgmt
+  ipv4-subnet: 172.20.20.0/24
+topology:
+  nodes:
+    leaf1:
+      kind: arista_ceos
+      image: ceos:4.36.1F
+      mgmt-ipv4: 172.20.20.11

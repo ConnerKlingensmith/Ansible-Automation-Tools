@@ -1,0 +1,52 @@
+{
+  "name": "aristalab",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab-mgmt",
+        "bridge": "br-5e57a70b311a",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "external-access": true
+      }
+    }
+  },
+  "ssh-pub-keys": ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDP+G85SOU/k9n+g9dxgU4wFtKAxwaLpfeO+VnrLtd3xDC3f3EYqPjCLE4gFLfQ+RJmlgSv6zhE9kEFEdPv3liliCdct0DqtBT7eyJr8xQf2Ej/eDVjYn1b0vWkxwEYdE7srJEh2WrDz4goVuYJ3ybaxG2SLYKxDN6OuqngpEhPXdYHj9d8OW2dqEVUbuWmmgNu81bdnfBMFnbRxnnJFFXAIZHyy+Xvd7sh4O+73tJ0syLNryWfss2DhMsl+VuMzRbfdF9IdJRdSbV86NQ6bOfxlu5soFg+BgzSVv+K2hFTLGWZYw8mB2otR12S2wzt2Zg5+XMhgR9du9j5wdBTd+aF"],
+  "nodes": {
+    "leaf1": {
+      "index": "0",
+      "shortname": "leaf1",
+      "longname": "clab-aristalab-leaf1",
+      "fqdn": "leaf1.aristalab.io",
+      "group": "",
+      "labdir": "/home/ec2-user/Network-Automation-Tools/arista-lab/clab-aristalab/leaf1",
+      "kind": "arista_ceos",
+      "image": "ceos:4.36.1F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.11",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:ba:9b:fe",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5e57a70b311a",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/ec2-user/Network-Automation-Tools/arista-lab/clab-aristalab/leaf1",
+        "clab-node-longname": "clab-aristalab-leaf1",
+        "clab-node-name": "leaf1",
+        "clab-node-type": "",
+        "clab-owner": "ec2-user",
+        "clab-topo-file": "/home/ec2-user/Network-Automation-Tools/arista-lab/leaf1.clab.yaml",
+        "containerlab": "aristalab"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+  ]
+}

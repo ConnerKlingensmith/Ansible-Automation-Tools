@@ -1,0 +1,40 @@
+######################
+Drop into switch CLI
+######################
+
+docker exec -it clab-aristalab-leaf1 Cli
+
+#########################
+Create arista user/pass
+#########################
+
+enable
+configure
+username arista privilege 15 role network-admin secret Arista123!
+management api http-commands
+   no shutdown
+   protocol https
+end
+write memory
+
+########################
+Confirm API is running
+########################
+
+show management api http-commands
+
+###################################
+Verify Connectivity from ec2 host
+###################################
+
+ping -c 2 leaf1
+ssh arista@leaf1
+
+################################
+Confirm eAPI ansers over HTTPS
+################################
+
+curl -k -u arista:Arista123! https://leaf1/command-api \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"runCmds","params":{"version":1,"cmds":["show hostname"],"format":"json"},"id":"health"}' \
+  -o /dev/null -w "%{http_code}\n"
