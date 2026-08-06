@@ -1,3 +1,9 @@
+#########################
+Resolve leaf1 for SSH
+#########################
+
+echo "172.20.20.11 leaf1" | sudo tee -a /etc/hosts
+
 ######################
 Drop into switch CLI
 ######################
